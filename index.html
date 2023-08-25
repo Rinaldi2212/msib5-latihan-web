@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: large;
+        margin: 0;
+        padding: 0;
+        background-color: #464646;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #d9d3d3e3;
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background-image: url(container.jpg);
+      }
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      label,
+      input,
+      select,
+      button {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #0051a8;
+        color: #fff;
+        border: beige;
+        cursor: progress;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 50px;
+      }
+
+      th,
+      td {
+        border: 3px solid #000000;
+        padding: 10px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+    <title>Hitung Nilai Rata-rata</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>FORM TABEL DATA</h1>
+      <form id="gradeForm">
+        <label for="nama">Nama Mahasiswa:</label>
+        <input type="text" id="nama" name="nama" required />
+
+        <label for="mataKuliah">Mata Kuliah:</label>
+        <input type="text" id="mataKuliah" name="mataKuliah" required />
+
+        <label for="grade">Grade:</label>
+        <select id="grade" name="grade" required>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+        </select>
+
+        <button type="button" id="hitungButton">Hitung</button>
+      </form>
+
+      <table id="resultTable" class="hidden">
+        <thead>
+          <tr>
+            <th>Nama Mahasiswa</th>
+            <th>Mata Kuliah</th>
+            <th>Grade</th>
+            <th>Nilai Rata-rata</th>
+          </tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const hitungButton = document.getElementById("hitungButton");
+        const resultTable = document.getElementById("resultTable");
+        const resultBody = document.getElementById("resultBody");
+
+        hitungButton.addEventListener("click", function () {
+          const nama = document.getElementById("nama").value;
+          const mataKuliah = document.getElementById("mataKuliah").value;
+          const grade = document.getElementById("grade").value;
+
+          let skalaNilai = 0;
+          switch (grade) {
+            case "A":
+              skalaNilai = 4.0;
+              break;
+            case "B":
+              skalaNilai = 3.0;
+              break;
+            case "C":
+              skalaNilai = 2.0;
+              break;
+            case "D":
+              skalaNilai = 1.0;
+              break;
+            case "E":
+              skalaNilai = 0.0;
+              break;
+          }
+
+          const rataRata = skalaNilai;
+
+          const newRow = resultBody.insertRow();
+          newRow.innerHTML = `
+          <td>${nama}</td>
+          <td>${mataKuliah}</td>
+          <td>${grade}</td>
+          <td>${rataRata}</td>
+        `;
+
+          resultTable.classList.remove("hidden");
+        });
+      });
+    </script>
+  </body>
+</html>
